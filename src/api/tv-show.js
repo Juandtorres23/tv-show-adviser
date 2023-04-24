@@ -1,13 +1,23 @@
 import axios from "axios";
-
-const BASE_URL = "https://api.themoviedb.org/3/"
-const API_KEY_PARAM = "?api_key=a592d06fc7d98449424111dbd6bc8b1f"
-
+import { FAKE_POPULARS, FAKE_RECOMMENDATIONS } from "./fake_data";
+import { BASE_URL, API_KEY_PARAM } from "../config";
 export class TVShowAPI {
     static async fetchPopulars(){
-        const response = await axios.get(`${BASE_URL}tv/popular${API_KEY_PARAM}`);
-        console.log(response.data.results)
-        return response.data.results;
+        // const response = await axios.get(`${BASE_URL}tv/popular${API_KEY_PARAM}`);
+        // console.log(response.data.results)
+        // return response.data.results;
+        return FAKE_POPULARS
+        //perform request
+        //return the response
+
+    }
+
+    static async fetchRecommendations(tvShowId){
+        // const response = await axios.get(`${BASE_URL}tv/${tvShowId}/recommendations${API_KEY_PARAM}`);
+        // return response.data.results;
+        
+        return FAKE_RECOMMENDATIONS
+
         //perform request
         //return the response
 
