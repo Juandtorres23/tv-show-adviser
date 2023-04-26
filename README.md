@@ -1,3 +1,17 @@
+Developed an application for the user to check out most popular tv shows and other recommended tv shows based on the most popular one. Using themoviedb.org API I was able to gather the information for the most popular, 10 recommended ones and added a functional search bar to search for a specific tv show. This app was created using React, ES6, css and is hosted on Vercel.
+
+
+
+
+
+
+
+
+
+
+
+
+
 # Getting Started with Create React App
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
