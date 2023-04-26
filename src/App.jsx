@@ -5,13 +5,15 @@ import { BACKDROP_BASE_URL } from "./config";
 import { TVShowDetail } from "./components/TVShowDetail/TVShowDetail";
 import { Logo } from "./components/Logo/Logo";
 import logoImg from "./assets/images/tmdblogo.png"
-import { TVShowListItem } from "./components/TVShowListItem/TVShowListItem";
+import { TVShowList } from "./components/TVShowList/TVShowList";
+import { SearchBar } from "./components/SearchBar/SearchBar";
 
-TVShowAPI.fetchPopulars();
+
 export function App() {
     const [currentTVShow, setCurrentTVShow] = useState();
     const [recommendationList, setRecommentationList] = useState([])
-   
+    
+    
     async function fetchPopulars() {
         const popularTVShowsList = await TVShowAPI.fetchPopulars();
         if (popularTVShowsList.length > 0) {
@@ -36,9 +38,17 @@ export function App() {
         }
     }, [currentTVShow]);
 
-    console.log(currentTVShow);
-    
-    console.log(recommendationList)
+    function updateCurrentTVShow(tvShow) {
+        setCurrentTVShow(tvShow)
+    }
+
+    async function fetchByTitle(title) {
+        const searchResponse = await TVShowAPI.fetchByTitle(title);
+        if (searchResponse.length > 0) {
+            setCurrentTVShow(searchResponse[0]);
+        } 
+    }
+
     return (
         <div className={s.main_container}
         style={{background: currentTVShow ? `linear-gradient(rgba(0,0,0,0.55), rgba(0,0,0,0.55)), url("${BACKDROP_BASE_URL}${currentTVShow.backdrop_path}") no-repeat center / cover` : "black"}}>
@@ -48,7 +58,7 @@ export function App() {
                         <Logo img={logoImg} title="Watowatch" subtitle="Find a show you may like" />
                     </div>
                     <div className="col-md-12 col-lg-4">
-                        <input style={{width: "100%"}} type="text" />
+                        <SearchBar onSubmit={fetchByTitle}/>
                     </div>
                 </div>
             </div>
@@ -56,16 +66,7 @@ export function App() {
                 {currentTVShow && <TVShowDetail tvShow={currentTVShow} />}
             </div>
             <div className={s.recommended_tv_show}>
-                {currentTVShow && (
-                <>
-                <TVShowListItem tvShow={currentTVShow} onClick={(tvShow)=> {
-                    console.log("I have been clicked", tvShow)
-                }}/>
-                <TVShowListItem tvShow={currentTVShow} onClick={(tvShow)=> {
-                    console.log("I have been clicked", tvShow)
-                }}/>
-                </>
-                )}
+                {currentTVShow && <TVShowList onClickItem={updateCurrentTVShow} tvShowList={recommendationList} /> }
             </div>
         </div>
     );

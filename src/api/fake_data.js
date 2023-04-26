@@ -21,7 +21,7 @@ export const FAKE_POPULARS = [
 ]
 
 export const FAKE_RECOMMENDATIONS = [
-    [
+    
         {
             "adult": false,
             "backdrop_path": "/vXpeJJs1z8OKC88CNJX9O9QOhtr.jpg",
@@ -247,4 +247,3 @@ export const FAKE_RECOMMENDATIONS = [
             ]
         }
     ]
-]
