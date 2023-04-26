@@ -15,17 +15,25 @@ export function App() {
     
     
     async function fetchPopulars() {
-        const popularTVShowsList = await TVShowAPI.fetchPopulars();
-        if (popularTVShowsList.length > 0) {
-            setCurrentTVShow(popularTVShowsList[0]);
-        } 
+        try{
+            const popularTVShowsList = await TVShowAPI.fetchPopulars();
+            if (popularTVShowsList.length > 0) {
+                setCurrentTVShow(popularTVShowsList[0]);
+            } 
+        }catch(error){
+            alert("Something went wrong when fetching the popular tv shows")
+        }
     }
 
     async function fetchRecommendations(tvShowId) {
-        const recommendationListResp = await TVShowAPI.fetchRecommendations(tvShowId);
-        if (recommendationListResp.length > 0) {
-            setRecommentationList(recommendationListResp.slice(0, 10));
-        } 
+        try{
+            const recommendationListResp = await TVShowAPI.fetchRecommendations(tvShowId);
+            if (recommendationListResp.length > 0) {
+                setRecommentationList(recommendationListResp.slice(0, 10));
+            } 
+        }catch(error){
+            alert("Something went wrong when fetching tv show recommendations")
+        }
     }
 
     useEffect(() => {
@@ -43,10 +51,14 @@ export function App() {
     }
 
     async function fetchByTitle(title) {
-        const searchResponse = await TVShowAPI.fetchByTitle(title);
-        if (searchResponse.length > 0) {
-            setCurrentTVShow(searchResponse[0]);
-        } 
+        try{
+            const searchResponse = await TVShowAPI.fetchByTitle(title);
+            if (searchResponse.length > 0) {
+                setCurrentTVShow(searchResponse[0]);
+            } 
+        }catch(error){
+            alert("Something went wrong when searching tv show")
+        }
     }
 
     return (
